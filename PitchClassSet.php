@@ -55,7 +55,9 @@ class PitchClassSet implements Iterator {
   }
   
   public function key() {
-    return $this->position;
+    if ($this->set[$this->position]) {
+      return $this->position;
+    }
   }
   
   public function next() {
