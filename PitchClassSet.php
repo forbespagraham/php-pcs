@@ -49,7 +49,9 @@ class PitchClassSet implements Iterator {
   }
 
   public function current() {
-    return $this->set[$this->position];
+    if ($this->set[$this->position]) {
+      return $this->set[$this->position];
+    }
   }
   
   public function key() {
@@ -60,7 +62,6 @@ class PitchClassSet implements Iterator {
     do {
       $this->position++;
     } while (is_null($this->set[$this->position]) && $this->valid());
-    return $this->set[$this->position];
   }
   
   public function rewind() {
