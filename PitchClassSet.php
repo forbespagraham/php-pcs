@@ -40,6 +40,14 @@ class PitchClassSet implements Iterator {
 
   }
 
+  public function interval_vector() {
+    
+  }
+
+  public function forte() {
+    
+  }
+
   public function current() {
     return $this->set[$this->position];
   }
