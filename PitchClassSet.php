@@ -4,21 +4,27 @@ class PitchClassSet implements Iterator {
 
   public function __construct($set) {
     $this->set = array_fill(0, 12, null);
-    foreach ($set as $element) {
-      $this->set[$element] = $element;
-    }
+    $this->add($set);
   }
 
   public function add($elements) {
-
+    foreach ($elements as $element) {
+      if (is_null($this->set[$element])) {
+        $this->set[$element] = $element;
+      }
+    }
   }
 
   public function remove($elements) {
-
+    foreach ($elements as $element) {
+      if (!is_null($this->set[$element])) {
+        $this->set[$element] = null;
+      }
+    }
   }
 
   public function complement() {
-
+    
   }
 
   public function inversion() {
