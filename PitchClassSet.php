@@ -52,6 +52,9 @@ class PitchClassSet implements Iterator {
     if ($this->set[$this->position]) {
       return $this->set[$this->position];
     }
+    else {
+      $this->next();
+    }
   }
   
   public function key() {
@@ -71,11 +74,11 @@ class PitchClassSet implements Iterator {
   }
   
   public function valid() {
-    if ($this->set[$this->position]) {
-      return true;
+    if ($this->position < 0 || $this->position >= 11) {
+      return false;
     }
     else {
-      return false;
+      return true;
     }
   }
 }
