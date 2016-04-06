@@ -71,11 +71,11 @@ class PitchClassSet implements Iterator {
   }
   
   public function valid() {
-    if ($this->position < 0 || $this->position >= 11) {
-      return false;
+    if ($this->set[$this->position]) {
+      return true;
     }
     else {
-      return true;
+      return false;
     }
   }
 }
