@@ -29,7 +29,14 @@ class PitchClassSet implements Iterator {
   }
 
   public function complement() {
-    
+    $c = array();
+    $this->rewind();
+    while ($this->valid()) {
+      if (is_null($this->set[$this->position])) {
+        $c[] = $this->position;
+      }
+    }
+    return $c;
   }
 
   public function inversion() {
