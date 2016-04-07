@@ -33,7 +33,13 @@ class PitchClassSet implements Iterator {
   }
 
   public function inversion() {
-
+    $i = array();
+    $this->rewind();
+    while ($this->valid()) {
+      $i[] = $this->current() % 12;
+      $this->next();
+    }
+    return $i;
   }
 
   public function prime_form() {
