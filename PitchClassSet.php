@@ -42,12 +42,7 @@ class PitchClassSet implements Iterator {
   }
 
   public function members() {
-    $m = array();
-    $this->rewind();
-    while ($this->valid()) {
-      $m[] = $this->current();
-      $this->next();
-    }
+    $m = iterator_to_array($this);
     return $m;
   }
 
@@ -66,16 +61,23 @@ class PitchClassSet implements Iterator {
 
   public function inversion() {
     $i = array();
-    $this->rewind();
-    while ($this->valid()) {
-      $i[] = (12 - $this->current()) % 12;
-      $this->next();
+    $members = $this->members();
+    foreach ($members as $element) {
+      $i[] = (12 - $element) % 12;
     }
     return $i;
   }
 
   public function prime_form() {
-
+    $rotations = $this->rotations();
+    $count = 0;
+    $distance_array = array();
+    foreach ($rotations as $rotation) {
+      $least = array_shift($rotation);
+      $greatest = array_pop($rotation);
+      $distance_array[$count] = $greatest - $least;
+    }
+    
   }
 
   public function interval_vector() {
