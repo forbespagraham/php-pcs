@@ -35,8 +35,9 @@ class PitchClassSet implements Iterator {
       if (is_null($this->set[$this->position])) {
         $c[] = $this->position;
       }
-      $this->next();
+      $this->position++;
     }
+    $this->rewind();
     return $c;
   }
 
