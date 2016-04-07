@@ -28,6 +28,29 @@ class PitchClassSet implements Iterator {
     }
   }
 
+  public function rotations() {
+    $r = array();
+    $members = $this->members();
+    $count = count($members);
+    $r[] = $members;
+    for ($i = 1; $i < $count; $i++) {
+      $e = array_shift($members);
+      array_push($members, $e + 12);
+      $r[] = $members;
+    }
+    return $r;
+  }
+
+  public function members() {
+    $m = array();
+    $this->rewind();
+    while ($this->valid()) {
+      $m[] = $this->current();
+      $this->next();
+    }
+    return $m;
+  }
+
   public function complement() {
     $c = array();
     $this->rewind();
