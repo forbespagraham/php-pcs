@@ -36,7 +36,7 @@ class PitchClassSet implements Iterator {
     $i = array();
     $this->rewind();
     while ($this->valid()) {
-      $i[] = $this->current() % 12;
+      $i[] = (12 - $this->current()) % 12;
       $this->next();
     }
     return $i;
