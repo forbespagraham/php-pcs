@@ -73,7 +73,7 @@ class PitchClassSet implements Iterator {
     $count = 0;
     $distance_array = array();
     foreach ($rotations as $rotation) {
-      $distance = $this->distance($rotation);
+      $distance_array[] = $this->distance($rotation);
     }
   }
 
