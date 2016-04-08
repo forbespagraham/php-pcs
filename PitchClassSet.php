@@ -73,11 +73,14 @@ class PitchClassSet implements Iterator {
     $count = 0;
     $distance_array = array();
     foreach ($rotations as $rotation) {
-      $least = array_shift($rotation);
-      $greatest = array_pop($rotation);
-      $distance_array[$count] = $greatest - $least;
+      $distance = $this->distance($rotation);
     }
-    
+  }
+
+  private function distance($set) {
+    $least = array_shift($set);
+    $greatest = array_pop($set);
+    return $greatest - $least;
   }
 
   public function interval_vector() {
