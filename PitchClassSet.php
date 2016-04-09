@@ -73,8 +73,16 @@ class PitchClassSet implements Iterator {
     $rotations = $this->rotations();
     $count = 0;
     $distance_array = array();
+    $primes = array();
+    $greatest_distance = 0;
     foreach ($rotations as $rotation) {
       $distance_array[] = $this->distance($rotation);
+    }
+    foreach ($distance_array as $key => $distance) {
+      if ($distance > $greatest_distance) {
+        $greatest_distance = $distance;
+        
+      }
     }
   }
 
