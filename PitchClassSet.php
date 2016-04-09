@@ -2,6 +2,7 @@
 class PitchClassSet implements Iterator {
   private $position = 0;
   protected $set = array();
+  static $rotation_place;
 
   public function __construct($set) {
     $this->position = 0;
