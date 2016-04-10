@@ -2,12 +2,14 @@
 class PitchClassSet implements Iterator {
   private $position = 0;
   protected $set = array();
-  static $rotation_place;
-
+  public $rotations = array();
+  static $distance_place = null;
+  
   public function __construct($set) {
     $this->position = 0;
     $this->set = array_fill(0, 12, null);
     $this->add($set);
+	$this->rotations = $this->get_rotations();
   }
 
   public function add($elements) {
@@ -29,7 +31,7 @@ class PitchClassSet implements Iterator {
     }
   }
 
-  public function rotations() {
+  public function get_rotations() {
     $r = array();
     $members = $this->members();
     $count = count($members);
@@ -70,20 +72,63 @@ class PitchClassSet implements Iterator {
   }
 
   public function prime_form() {
-    $rotations = $this->rotations();
-    $count = 0;
-    $distance_array = array();
-    $primes = array();
-    $greatest_distance = 0;
-    foreach ($rotations as $rotation) {
+    if (isset($distance_place)) {
+	  $distance_array = array();	  
+	}
+	else {
+	  $distance_place = count($this->members());
+	}
+	foreach ($this->rotations as $rotation) {
       $distance_array[] = $this->distance($rotation);
+	}
+	if ($this->one_smallest($distance_array)) {
+	  $smallest = $this->rotations[$this->smallest($distance_array)];
+	  return $this->normalize($smallest);	
+	}
+	else {
+		
+	}
+  }
+
+  private function normalize($set) {
+	$normalized = array();
+    $subtract_amt = array_shift($set);
+    array_unshift($set, $subtract_amt);
+    foreach ($set as $element) {
+	  $normalized[] = $element - $subtract_amt;
     }
+    return $normalized;	
+  }
+
+  private function smallest($distance_array) {
+	$smallest_value = $distance_array[0];
+	$smallest_key = 0;
+	foreach ($distance_array as $key => $distance) {
+	  if ($distance < $smallest_value) {
+	    $smallest_value = $distance;
+	    $smallest_key = $key;	
+	  }
+	}
+	return $smallest_key;
+  }
+
+  private function one_smallest($distance_array) {
+	$smallest = $distance_array[0];
+	$smallest_count = 0;
     foreach ($distance_array as $key => $distance) {
-      if ($distance > $greatest_distance) {
-        $greatest_distance = $distance;
-        
-      }
+	  if ($distance == $smallest) {
+	    $smallest_count++;	
+	  }
+	  else {
+	    if ($distance < $smallest) {
+		  $smallest = $distance;
+	    }	
+	  }
     }
+    if ($smallest_count > 1) {
+	  return false;
+    }
+    return true;	
   }
 
   private function distance($set) {
