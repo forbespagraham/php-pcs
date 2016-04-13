@@ -107,18 +107,27 @@ class PitchClassSet implements Iterator {
 	if ($this->one_smallest($distance_array)) {
 	  $packed_array = array();
 	  $packed_smallest = 11;
+	  $next_last = 0;
+	  $greatest_distance = 11;
 	  $smallest = $this->rotations[$this->smallest($distance_array)];
 	  $normal = $this->normalize($smallest);
 	  $normal_inversion = $this->get_inversion($normal);
+	  sort($normal_inversion);
 	  $normal_rotations = $this->generate_rotations($normal_inversion);
 	  foreach ($normal_rotations as $key => $normal_rotation) { 
-	    $packed_array[] = array_shift($normal_rotation);
-	    $packed_array[] = array_shift($normal_rotation);
-	    $packed_distance = $packed_array[1] - $packed_array[0];
+	    $least = array_shift($normal_rotation);
+	    $next_least = array_shift($normal_rotation);
+	    $packed_distance = $next_least - $least;
+		$greatest = array_pop($normal_rotation);
 	    if ($packed_distance < $packed_smallest) {
-		  
+		  $packed_smallest = $packed_distance;
+		  if ($greatest_distance < $greatest) {
+		    $prime_set = $normal_rotations[$key];
+		    $normal_prime = $this->normalize($prime_set);	
+		  }
 	    }
 	  }
+	  return $normal_prime;
 	}
 	else {
 	  $this::$distance_place--;
