@@ -114,7 +114,7 @@ class PitchClassSet implements Iterator {
 	  $normal_inversion = $this->get_inversion($normal);
 	  sort($normal_inversion);
 	  $normal_rotations = $this->generate_rotations($normal_inversion);
-	  foreach ($normal_rotations as $key => $normal_rotation) { 
+	  foreach ($normal_rotations as $key => $normal_rotation) {
 	    $least = array_shift($normal_rotation);
 	    $next_least = array_shift($normal_rotation);
 	    $packed_distance = $next_least - $least;
@@ -214,8 +214,8 @@ class PitchClassSet implements Iterator {
   
   public function next() {
     do {
-      $this->position++;
-    } while (is_null($this->set[$this->position]) && $this->valid());
+      	$this->position++;
+    } while (is_null(@$this->set[$this->position]) && $this->valid());
   }
   
   public function rewind() {
@@ -223,7 +223,7 @@ class PitchClassSet implements Iterator {
   }
   
   public function valid() {
-    if ($this->position < 0 || $this->position >= 11) {
+    if ($this->position < 0 || $this->position > 11) {
       return false;
     }
     else {
