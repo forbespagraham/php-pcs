@@ -22,6 +22,7 @@ class PitchClassSet implements Iterator {
 				}
 			}
 		}
+		$this->rotations = $this->get_rotations();
 	}
 
 	public function remove($elements) {
@@ -30,6 +31,7 @@ class PitchClassSet implements Iterator {
 				$this->set[$element] = null;
 			}
 		}
+		$this->rotations = $this->get_rotations();
 	}
 
 	public function get_rotations() {
