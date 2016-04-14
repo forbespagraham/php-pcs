@@ -119,7 +119,7 @@ class PitchClassSet implements Iterator {
 				$least = array_shift($normal_rotation);
 				$next_least = array_shift($normal_rotation);
 				$packed_distance = $next_least - $least;
-				$greatest = array_pop($normal_rotation);
+				$greatest = array_pop($normal_rotation) - $least;
 				if ($packed_distance < $packed_smallest) {
 					$packed_smallest = $packed_distance;
 					if ($greatest_distance < $greatest) {
@@ -127,10 +127,6 @@ class PitchClassSet implements Iterator {
 						$normal_prime = $this->normalize($prime_set);	
 					}
 				}
-			}
-			if ($this::$distance_place == 1) {
-			  var_dump($normal_rotations);
-			  $normal_prime = $this->normalize($normal_rotations[0]);
 			}
 			return $normal_prime;
 		}
