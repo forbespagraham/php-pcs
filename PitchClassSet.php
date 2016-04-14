@@ -10,7 +10,6 @@ class PitchClassSet implements Iterator {
 		$this->position = 0;
 		$this->set = array_fill(0, 12, null);
 		$this->add($set);
-		$this->rotations = $this->get_rotations();
 	}
 
 	public function add($elements) {
