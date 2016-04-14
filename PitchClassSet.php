@@ -128,7 +128,9 @@ class PitchClassSet implements Iterator {
 					}
 				}
 			}
-			var_dump($this::$distance_place);
+			if ($this::$distance_place == 1) {
+			  $normal_prime = $this->normalize($normal_rotations[0]);
+			}
 			return $normal_prime;
 		}
 		else {
