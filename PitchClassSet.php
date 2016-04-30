@@ -193,7 +193,20 @@ class PitchClassSet implements Iterator {
 	}
 
 	public function interval_vector() {
-
+		$prime = $this->prime_form();
+		$count = count($prime);
+		$interval_array = array_fill(1, 6, 0);
+		foreach ($prime as $key => $element) {
+			for ($i = $count - 1; $i > $key; $i--) {
+				//print "Element " . $prime[$key] .", " . $prime[$i] . "\r\n";
+				$interval = abs($prime[$key] - $prime[$i]);
+				if ($interval > 6) {
+					$interval = 12 - $interval;
+				}
+				$interval_array[$interval]++;
+			}
+		}
+		return implode('', $interval_array);
 	}
 
 	public function forte() {
