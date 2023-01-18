@@ -65,10 +65,6 @@ class PitchClassSet {
 		$permutations = $this->getPermutations($set);
 		$adjustedPermutations = $this->getAdjustedPermutations($permutations, 12);
 		foreach ($adjustedPermutations as $index => $adjustedPermutation) {
-			/*$closest = $this->closest($adjustedPermutations[$index], $adjustedPermutations[$minDistanceIndex]);
-			if ($closest == $adjustedPermutations[$index]) {
-				$minDistanceIndex = $index;
-			}*/
 			$distance = $adjustedPermutation[count($adjustedPermutation) - 1] - $adjustedPermutation[0];
 			if ($distance < $minDistance) {
 				$minDistanceIndex = $index;
